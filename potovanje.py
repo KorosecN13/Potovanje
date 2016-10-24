@@ -5,7 +5,7 @@ import os
 import pandas
 
 def potovanje(mesto="LONDON",datum_zacetka = "2016-12-01", datum_konca = "2016-12-03", stevilo_zadetkov=50):
-    ime_datoteke = mesto + ".txt"
+    ime_datoteke = mesto
     if os.path.isfile(ime_datoteke):
         print("Datoteke za to mesto so že shranjene!")
 
@@ -15,14 +15,40 @@ def potovanje(mesto="LONDON",datum_zacetka = "2016-12-01", datum_konca = "2016-1
         slovar = get_slovar(url)
         with open(mesto + ".txt","w") as f:
             pprint(slovar, stream=f)
-        csv = ""
+##        csv = ""
+##        for i in range(stevilo_zadetkov):
+##            csv += slovar["hotelList"][i]["name"]+","
+##            csv += slovar["hotelList"][i]["proximityDistanceInKiloMeters"]+","
+##            csv += slovar["hotelList"][i]["lowRateInfo"]["priceToShowUsers"] + "\n"
         for i in range(stevilo_zadetkov):
-            csv += slovar["hotelList"][i]["name"]+","
-            csv += slovar["hotelList"][i]["proximityDistanceInKiloMeters"]+","
-            csv += slovar["hotelList"][i]["lowRateInfo"]["priceToShowUsers"] + "\n"
+            hotel_name = slovar["hotelList"][i]["name"]
+            proximity_distance = slovar["hotelList"][i]["proximityDistanceInKiloMeters"]
+            price = slovar["hotelList"][i]["lowRateInfo"]["priceToShowUsers"]
 
-        with open(mesto + ".csv","w") as f:
-            f.write(csv)
+        for i in 
+
+    '''Iz seznama slovarjev ustvari CSV datoteko z glavo.'''
+        with open(ime_datoteke+"_hoteli", 'w') as csv_dat:
+            writer = csv.DictWriter(csv_dat, fieldnames=imena_polj)
+            writer.writeheader()
+            for slovar in slovarji:
+                writer.writerow(slovar)
+
+        with open(ime_datoteke +"_cene", 'w') as csv_dat:
+            writer = csv.DictWriter(csv_dat, fieldnames=imena_polj)
+            writer.writeheader()
+            for slovar in slovarji:
+                writer.writerow(slovar)
+
+        with open(ime_datoteke+"_oddaljenost", 'w') as csv_dat:
+            writer = csv.DictWriter(csv_dat, fieldnames=imena_polj)
+            writer.writeheader()
+            for slovar in slovarji:
+                writer.writerow(slovar)
+
+
+##        with open(mesto + ".csv","w") as f:
+##            f.write(csv)
 
         print("Poglej in se prepričaj!")
 
