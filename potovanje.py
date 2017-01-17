@@ -4,6 +4,7 @@ from pprint import pprint
 import os
 from datetime import date
 from vikendi2017 import vikendi_get, datumi_vikendov_get
+import unicodedata
 
 mesta = ["LONDON", "PARIS", "MOSCOW", "BERLIN", "PRAGUE", "AMSTERDAM", "BERN"]
 
@@ -15,7 +16,7 @@ def potovanje(mesto="LONDON",datum_zacetka_obdobja = date(2017,2,1), datum_konca
        datum1, cena11, cena12, ...
        datum2, cena21, cena22, ..."""
     
-    ime_datoteke = mesto + "1.csv"
+    ime_datoteke = mesto + "2.csv"
     if os.path.isfile(ime_datoteke):
         print("Podatki za to mesto so že shranjeni!")
     else:
@@ -59,6 +60,8 @@ def potovanje(mesto="LONDON",datum_zacetka_obdobja = date(2017,2,1), datum_konca
             stevec += 1
 
         with open(mesto + "1Hoteli.csv","w") as f:
+            hoteli.encode('ascii', 'ignore')
+            #hoteli = unicode(hoteli, errors= 'ignore')
             f.write(hoteli)
 
 
